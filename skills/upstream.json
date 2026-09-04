@@ -1,0 +1,27 @@
+{
+  "syncedAt": "2026-08-13",
+  "sourceRepository": "api/frontend/public/downloads",
+  "publicBaseUrl": "https://open.chineselaw.com/downloads/",
+  "skills": [
+    {
+      "name": "prc-legal-research-law-search",
+      "archive": "prc-legal-research-law-search.zip",
+      "sha256": "581ba6a2057c95200d9349b7651bb0373d2062aa2b3374fbe7ada8e1d1e46fdb"
+    },
+    {
+      "name": "prc-legal-research-case-search",
+      "archive": "prc-legal-research-case-search.zip",
+      "sha256": "eee647df121eeeca403094ceef3579d56e4e1e55285f0722351d5e55770145db"
+    },
+    {
+      "name": "prc-legal-research-company-search",
+      "archive": "prc-legal-research-company-search.zip",
+      "sha256": "710c740381ae54dedf93061d5e3f0a29a55227af788c1d37e2c1a6f1496a3c9f"
+    },
+    {
+      "name": "prc-legal-research-securities-compliance",
+      "archive": "prc-legal-research-securities-compliance.zip",
+      "sha256": "2348dda2def054332a3802d09447e5c0e45593cd0e469ab4243fe14e9b99bf8d"
+    }
+  ]
+}

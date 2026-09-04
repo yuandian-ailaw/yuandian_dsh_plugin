@@ -1,0 +1,15 @@
+node_modules/
+dist/
+coverage/
+*.tgz
+.DS_Store
+.idea/
+*.log
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+.credentials*
+.pnpm-store/
+/design-qa.md
+/AGENTS.md

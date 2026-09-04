@@ -1,0 +1,148 @@
+{
+  "name": "huayu-yuandian-legal-data",
+  "version": "0.1.5",
+  "description": "Huayu Yuandian Legal Data plugin for DeepSeek Harness",
+  "keywords": [
+    "deepseek-harness",
+    "dsh-plugin",
+    "mcp",
+    "legal-research",
+    "china-law"
+  ],
+  "homepage": "https://open.chineselaw.com/",
+  "bugs": {
+    "email": "yuandianzonghe@thunisoft.com",
+    "url": "https://github.com/yuandian-ailaw/yuandian_dsh_plugin/issues"
+  },
+  "type": "module",
+  "main": "./dist/index.mjs",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs"
+    },
+    "./client": {
+      "default": "./dist/client.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "assets",
+    "dist",
+    "scripts/ensure-dist.mjs",
+    "skills",
+    "cordis.patch.yml",
+    "LICENSES",
+    "LICENSES.md",
+    "CHANGELOG.md",
+    "README.md",
+    "README.en.md",
+    "THIRD_PARTY_NOTICES.md"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-api-remotes",
+        "@deepseek-ai/dsh-client-ui-settings"
+      ],
+      "platform": "web"
+    }
+  },
+  "engines": {
+    "node": ">=22.19.0"
+  },
+  "packageManager": "pnpm@11.7.0",
+  "scripts": {
+    "lint": "oxlint src tests scripts tsdown.config.ts vitest.config.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "check": "pnpm run lint && pnpm run typecheck && pnpm run test",
+    "build": "tsdown",
+    "verify:artifact": "node scripts/verify-artifact.mjs",
+    "prepare": "node scripts/ensure-dist.mjs",
+    "prepack": "pnpm run check && pnpm run build && pnpm run verify:artifact"
+  },
+  "dependencies": {
+    "@deepseek-ai/schemastery": "3.18.2",
+    "@modelcontextprotocol/sdk": "1.30.0",
+    "yaml": "2.9.0"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": ">=4.0.2 <5.0.0",
+    "@deepseek-ai/dsh": ">=0.1.2-rc.1 <0.2.0",
+    "@deepseek-ai/dsh-api-remotes": ">=0.1.2-rc.1 <0.2.0",
+    "@deepseek-ai/dsh-client-connection": ">=0.1.2-rc.1 <0.2.0",
+    "@deepseek-ai/dsh-client-ui-renderer": ">=0.1.2-rc.1 <0.2.0",
+    "@deepseek-ai/dsh-client-ui-settings": ">=0.1.2-rc.1 <0.2.0",
+    "@deepseek-ai/dsh-credentials": ">=0.1.2-rc.1 <0.2.0",
+    "@deepseek-ai/dsh-skill": ">=0.1.2-rc.1 <0.2.0",
+    "@deepseek-ai/dsh-tools": ">=0.1.2-rc.1 <0.2.0",
+    "react": ">=18.2.0 <19.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/cordis": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-client-connection": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-client-ui-settings": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-credentials": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-skill": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-tools": {
+      "optional": true
+    },
+    "react": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-api-remotes": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-client-ui-renderer": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@deepseek-ai/cordis": "^4.0.2",
+    "@deepseek-ai/dsh-api-gateway": "0.1.2-rc.1",
+    "@deepseek-ai/dsh-api-remotes": "0.1.2-rc.1",
+    "@deepseek-ai/dsh-api-settings-controller": "0.1.2-rc.1",
+    "@deepseek-ai/dsh-client-connection": "0.1.2-rc.1",
+    "@deepseek-ai/dsh-client-ui-renderer": "0.1.2-rc.1",
+    "@deepseek-ai/dsh-client-ui-settings": "0.1.2-rc.1",
+    "@deepseek-ai/dsh-client-ui-slots": "0.1.2-rc.1",
+    "@deepseek-ai/dsh-credentials": "0.1.2-rc.1",
+    "@deepseek-ai/dsh-skill": "0.1.2-rc.1",
+    "@deepseek-ai/dsh-tools": "0.1.2-rc.1",
+    "@deepseek-ai/dsh-typert-protocol": "0.1.2-rc.1",
+    "@deepseek-ai/dsh-util-values": "0.1.2-rc.1",
+    "@types/node": "22.20.1",
+    "@types/react": "18.3.31",
+    "@types/react-dom": "18.3.7",
+    "@vitest/coverage-v8": "4.1.11",
+    "oxlint": "1.79.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "tsdown": "0.22.14",
+    "typescript": "5.9.2",
+    "vitest": "4.1.11"
+  },
+  "license": "SEE LICENSE IN LICENSES.md",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yuandian-ailaw/yuandian_dsh_plugin.git"
+  }
+}

@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 安全漏洞报告
+    url: https://open.chineselaw.com/
+    about: 请按 SECURITY.md 私下联系，不要公开披露漏洞或凭证

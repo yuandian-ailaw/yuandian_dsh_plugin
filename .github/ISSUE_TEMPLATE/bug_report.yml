@@ -1,0 +1,41 @@
+name: Bug 报告
+description: 报告可复现的插件问题；安全漏洞请勿使用此模板
+title: "[Bug] "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: 请先确认报告中不包含 API Key、Token、回调地址、用户查询或其他隐私数据。安全问题请阅读 SECURITY.md。
+  - type: input
+    id: version
+    attributes:
+      label: 插件与 Harness 版本
+      placeholder: huayu-yuandian-legal-data 0.1.5 / dsh 0.1.2-rc.1
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: 运行环境
+      placeholder: macOS 15 / Node.js 22.19.0
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: 复现步骤
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 预期与实际结果
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: 隐私确认
+      options:
+        - label: 我已移除凭证、回调地址、用户数据和其他敏感信息
+          required: true

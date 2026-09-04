@@ -1,0 +1,20 @@
+- insert:
+    - id: huayu-yuandian-legal-data
+      name: huayu-yuandian-legal-data
+      inject: [tools, skills, credentials]
+      config:
+        endpoint: https://open.chineselaw.com/mcp
+        serverName: yuandian
+        auth:
+          mode: auto
+          callbackPort: 1455
+          openBrowser: true
+          timeoutMs: 300000
+        httpTimeoutMs: 60000
+        toolCallTimeoutMs: 60000
+        failOnStartupError: true
+        reconnect:
+          enabled: true
+          initialDelayMs: 500
+          maxDelayMs: 30000
+          maxAttempts: 10
