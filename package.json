@@ -68,7 +68,7 @@
   "dependencies": {
     "@deepseek-ai/schemastery": "3.18.2",
     "@modelcontextprotocol/sdk": "1.30.0",
-    "yaml": "2.9.0"
+    "yaml": "2.9.1"
   },
   "peerDependencies": {
     "@deepseek-ai/cordis": ">=4.0.2 <5.0.0",
