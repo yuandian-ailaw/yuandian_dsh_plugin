@@ -66,9 +66,9 @@
     "prepack": "pnpm run check && pnpm run build && pnpm run verify:artifact"
   },
   "dependencies": {
-    "@deepseek-ai/schemastery": "3.18.2",
-    "@modelcontextprotocol/sdk": "1.30.0",
-    "yaml": "2.9.0"
+    "@deepseek-ai/schemastery": "3.18.4",
+    "@modelcontextprotocol/sdk": "1.31.0",
+    "yaml": "2.9.1"
   },
   "peerDependencies": {
     "@deepseek-ai/cordis": ">=4.0.2 <5.0.0",
