@@ -9,8 +9,7 @@ import { CallToolRequestSchema, ListToolsRequestSchema } from '@modelcontextprot
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { resolveConfig } from '../src/config.js'
 import { asCredentialRef } from '../src/auth/store.js'
-import { registerMcpBridge } from '../src/mcp/index.js'
-import { registerBundledSkills } from '../src/skills.js'
+import { apply } from '../src/index.js'
 import { startConnection } from '../src/mcp/connection.js'
 
 const cleanups: Array<() => Promise<void>> = []
@@ -105,12 +104,11 @@ describe('Streamable HTTP 假服务集成', () => {
       skills.add(skill.name)
       return () => { skills.delete(skill.name) }
     } } as never)
-    await registerBundledSkills(ctx)
-    await registerMcpBridge(ctx, resolveConfig({
+    await apply(ctx, {
       endpoint: fake.endpoint,
       auth: { mode: 'auto', openBrowser: false },
       reconnect: { enabled: false },
-    }))
+    })
     expect(skills.size).toBe(4)
     expect(definitions.size).toBe(0)
 

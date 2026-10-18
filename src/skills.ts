@@ -54,7 +54,7 @@ export function parseBundledSkill(raw: string, path: string): LoadedBundledSkill
     content,
     path,
     source: 'bundled',
-    provider: 'huayu-yuandian-legal-data',
+    provider: 'yuandian-dsh-plugin',
     resourceBase: { kind: 'directory', path: dirname(path) },
     metadata: fields,
   }
@@ -71,10 +71,10 @@ export async function registerBundledSkills(ctx: Context, root = DEFAULT_SKILLS_
   const skills = await loadBundledSkills(root)
   ctx.effect(() => {
     const disposers = skills.map(skill => ctx.skills.register(skill))
-    ctx.logger.debug('华宇元典法律数据：已注册 %d 个官方 Skill', skills.length)
+    ctx.logger.debug('元典插件：已注册 %d 个官方 Skill', skills.length)
     return () => {
       for (const dispose of disposers.reverse()) dispose()
-      ctx.logger.debug('华宇元典法律数据：已注销官方 Skill')
+      ctx.logger.debug('元典插件：已注销官方 Skill')
     }
   }, 'yuandian.skills')
 }

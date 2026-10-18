@@ -9,3 +9,7 @@ allowBuilds:
 
 onlyBuiltDependencies:
   - esbuild
+
+# Match the peer required by DSH 0.2.1-rc.2 app-boot.
+overrides:
+  '@deepseek-ai/cordis-plugin-group': 1.0.5

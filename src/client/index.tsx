@@ -13,6 +13,7 @@ import {
 } from '../auth/constants.js'
 import {
   cancelOAuthAuthorization,
+  removeCredentials,
   oauthAuthorizationView,
   oauthCancellationAvailability,
 } from './authentication.js'
@@ -685,14 +686,13 @@ function AuthenticationDialog(props: {
     try {
       if (state.oauth.configured || state.oauthPending) await cancelOAuthAuthorization(props.api)
       if (state.apiKey.configured) {
-        const cleared = await props.api.credentials.unset(DEFAULT_API_KEY_CREDENTIAL_REF)
-        const failure = rpcError(cleared)
-        if (failure !== undefined) throw new Error(failure)
+        await removeCredentials(props.api, [DEFAULT_API_KEY_CREDENTIAL_REF])
       }
       await requestOAuthStart(props.api)
       await refresh()
       setNotice('已切换到 OAuth，授权页面将由 DeepSeek Harness 自动打开。')
     } catch (cause) {
+      await refresh()
       setError(cause instanceof Error ? cause.message : '无法启动 OAuth 授权')
     } finally {
       setBusy(false)
@@ -710,6 +710,7 @@ function AuthenticationDialog(props: {
       setNotice('OAuth 授权已取消。')
       closeButtonRef.current?.focus()
     } catch (cause) {
+      await refresh()
       setError(cause instanceof Error ? cause.message : 'OAuth 授权取消失败')
     } finally {
       setBusy(false)
@@ -744,14 +745,13 @@ function AuthenticationDialog(props: {
     setError(undefined)
     setNotice(undefined)
     try {
-      const response = await props.api.credentials.unset(DEFAULT_API_KEY_CREDENTIAL_REF)
-      const failure = rpcError(response)
-      if (failure !== undefined) throw new Error(failure)
+      await removeCredentials(props.api, [DEFAULT_API_KEY_CREDENTIAL_REF])
       await requestOAuthStart(props.api)
       await refresh()
       setTab('oauth')
       setNotice('API Key 已移除，正在切换到 OAuth。')
     } catch (cause) {
+      await refresh()
       setError(cause instanceof Error ? cause.message : 'API Key 移除失败')
     } finally {
       setBusy(false)

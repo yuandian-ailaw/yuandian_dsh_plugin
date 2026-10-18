@@ -6,7 +6,7 @@
 
 `huayu-yuandian-legal-data` 将[元典开放平台](https://open.chineselaw.com/)的聚合 MCP 入口接入 DeepSeek Harness，并随包提供法规、案例、企业和证券合规 4 个官方 Skill。
 
-当前版本：`0.1.5`。兼容 DeepSeek Harness `>=0.1.2-rc.1 <0.2.0`，要求 Node.js `>=22.19.0`。
+当前版本：`0.1.6`。兼容 DeepSeek Harness `0.2.1-rc.2`，要求 Node.js `>=22.19.0`。
 
 项目原创代码采用 MIT License；随包 Skill 和品牌 Logo 使用单独授权，不属于 MIT License。完整边界见 [LICENSES.md](./LICENSES.md)。
 
@@ -24,6 +24,20 @@
 - 运行中需要重新授权时，已经失败的工具调用不会自动重放，避免重复执行有副作用的操作；连接恢复后由用户重试。
 
 ## 安装
+
+### 从 npm 安装（旧版 DSH）
+
+`0.1.6` 尚未发布到 npm；DSH `0.2.1-rc.2` 请使用下方本地目录或 tarball 安装。以下命令仅适用于旧版 DSH `0.1.2-rc.1` 和插件 `0.1.5`。
+
+```sh
+dsh plugin --profile web add huayu-yuandian-legal-data@0.1.5
+```
+
+未全局安装 Harness 时：
+
+```sh
+npx @deepseek-ai/dsh@0.1.2-rc.1 plugin --profile web add huayu-yuandian-legal-data@0.1.5
+```
 
 ### 从本地目录安装
 
@@ -44,7 +58,7 @@ pnpm pack
 用户侧安装：
 
 ```sh
-dsh plugin --profile web add /absolute/path/to/huayu-yuandian-legal-data-0.1.5.tgz
+dsh plugin --profile web add /absolute/path/to/huayu-yuandian-legal-data-0.1.6.tgz
 ```
 
 公开仓库 CI 会在 Linux、macOS 和 Windows 上执行质量门禁，并用 `pnpm pack --dry-run` 校验包内容；CI 不会自动发布 npm 包或创建正式制品。正式制品只由维护者按 [RELEASING.md](./RELEASING.md) 发布。
@@ -53,10 +67,10 @@ dsh plugin --profile web add /absolute/path/to/huayu-yuandian-legal-data-0.1.5.t
 
 ```sh
 # macOS
-shasum -a 256 -c huayu-yuandian-legal-data-0.1.5.tgz.sha256
+shasum -a 256 -c huayu-yuandian-legal-data-0.1.6.tgz.sha256
 
 # Linux
-sha256sum -c huayu-yuandian-legal-data-0.1.5.tgz.sha256
+sha256sum -c huayu-yuandian-legal-data-0.1.6.tgz.sha256
 ```
 
 从源码安装时应固定公开仓库的 commit SHA，并只对可信源码授权构建。tarball 已包含构建产物，不需要安装时构建授权。
@@ -68,6 +82,8 @@ dsh plugin --profile web remove huayu-yuandian-legal-data
 ```
 
 ## 认证配置
+
+DSH 0.2.1 的存储凭据优先于环境变量等来源。清除存储值后，其他来源可能重新生效；插件会重新检查有效状态，仍有凭据时提示清理对应来源，不会误报已取消授权或已切换到 OAuth。
 
 设置页右上角的“认证配置”入口支持：
 
@@ -203,4 +219,4 @@ pnpm pack --dry-run
 - MCP 工具桥接的命名、同步和连接监督语义参考 DeepSeek Harness 的 MIT 实现。
 - `skills/` 中的元典官方 Skill 及其他第三方内容不因本项目采用 MIT License 而自动变更许可；其权利仍归各自权利人所有。
 - 完整适用边界见 [LICENSES.md](./LICENSES.md)，详细来源与第三方许可见 [THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md)。
-- 本包当前保留 `private: true`，不执行 npm 发布；经权利人确认，4 份元典官方 Skill 允许随本项目公开分发。
+- 本包由维护者手动发布到 npm；经权利人确认，4 份元典官方 Skill 允许随本项目公开分发。

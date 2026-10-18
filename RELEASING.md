@@ -31,3 +31,15 @@ node scripts/artifact-checksum.mjs huayu-yuandian-legal-data-<version>.tgz
 正式 `.tgz` 与 `.sha256` 必须同步到维护者控制的下载镜像，并验证摘要、下载配置和包内容完全一致。镜像仓库的提交应只包含安装包、摘要和对应下载配置，不得混入其他改动。
 
 完成镜像校验后再创建公开 tag 或 Release。不得把凭证、回调地址、用户数据、缓存或本机路径放入制品、证明或发布说明。
+
+## npm 发布
+
+完成上述质量门禁和镜像同步后，将同一份已校验的正式 tarball 发布到 npm（需要维护者登录及发布权限）：
+
+```sh
+npm whoami --registry=https://registry.npmjs.org/
+npm publish ./huayu-yuandian-legal-data-<version>.tgz --access public --registry=https://registry.npmjs.org/
+npm view huayu-yuandian-legal-data@<version> version dist.integrity --registry=https://registry.npmjs.org/
+```
+
+核对远端版本和 tarball 完整性与本地制品一致。已发布的 npm 版本不可覆盖；若版本已存在，先核对制品，变更内容需使用新版本。普通 CI 不持有 npm 发布凭证，不自动发布。

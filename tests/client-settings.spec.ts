@@ -8,6 +8,7 @@ import {
 } from '../src/auth/constants.js'
 import {
   cancelOAuthAuthorization,
+  removeCredentials,
   oauthAuthorizationView,
   oauthCancellationAvailability,
 } from '../src/client/authentication.js'
@@ -27,7 +28,7 @@ describe('华宇元典法律数据设置区块', () => {
   it('取消 OAuth 时清除凭据、授权完成标记和进行中尝试', async () => {
     const unset = vi.fn(async (_input: string) => ({ ok: true, value: undefined }))
 
-    await cancelOAuthAuthorization({ credentials: { unset } } as never)
+    await cancelOAuthAuthorization({ credentials: { unset, describe: async (refs: string[]) => ({ ok: true, value: Object.fromEntries(refs.map(ref => [ref, { configured: false, writable: true }])) }) } } as never)
 
     expect(unset.mock.calls.map(([input]) => input)).toEqual([
       DEFAULT_OAUTH_CREDENTIAL_REF,
@@ -43,6 +44,39 @@ describe('华宇元典法律数据设置区块', () => {
 
     await expect(cancelOAuthAuthorization({ credentials: { unset } } as never))
       .rejects.toThrow('凭据来自只读来源')
+  })
+
+  it('清除存储值后仍有环境凭据时不报告成功，也不发起 OAuth', async () => {
+    const set = vi.fn()
+    const api = { credentials: {
+      unset: vi.fn(async () => ({ ok: true, value: undefined })),
+      describe: vi.fn(async () => ({ ok: true, value: {
+        YUANDIAN_API_KEY: { configured: true, writable: true, source: 'env' },
+      } })),
+      set,
+    } }
+    await expect(removeCredentials(api as never, ['YUANDIAN_API_KEY'])).rejects.toThrow('其他来源仍提供有效凭据')
+    expect(set).not.toHaveBeenCalled()
+  })
+
+  it('清除后查询失败或缺少凭据状态时不误报成功', async () => {
+    const api = { credentials: {
+      unset: vi.fn(async () => ({ ok: true, value: undefined })),
+      describe: vi.fn(async () => ({ ok: false, error: { message: '查询失败' } })),
+    } }
+    await expect(removeCredentials(api as never, ['YUANDIAN_API_KEY'])).rejects.toThrow('查询失败')
+    const missing = { credentials: { ...api.credentials, describe: async () => ({ ok: true, value: {} }) } }
+    await expect(removeCredentials(missing as never, ['YUANDIAN_API_KEY'])).rejects.toThrow('无法确认')
+  })
+
+  it('OAuth 凭据由环境来源回退时不误报取消成功', async () => {
+    const api = { credentials: {
+      unset: vi.fn(async () => ({ ok: true, value: undefined })),
+      describe: async () => ({ ok: true, value: {
+        [DEFAULT_OAUTH_CREDENTIAL_REF]: { configured: true, writable: true, source: 'env' },
+      } }),
+    } }
+    await expect(cancelOAuthAuthorization(api as never)).rejects.toThrow('其他来源仍提供有效凭据')
   })
 
   it('只在已授权状态显示取消操作，并识别只读来源', () => {

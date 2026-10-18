@@ -6,7 +6,7 @@ Source repository：[yuandian-ailaw/yuandian_dsh_plugin](https://github.com/yuan
 
 `huayu-yuandian-legal-data` connects the aggregated [Yuandian Open Platform](https://open.chineselaw.com/) MCP endpoint to DeepSeek Harness. It also bundles four official skills for PRC legislation, court cases, company data, and securities compliance.
 
-Current version: `0.1.5`. It supports DeepSeek Harness `>=0.1.2-rc.1 <0.2.0` and requires Node.js `>=22.19.0`.
+Current version: `0.1.6`. It supports DeepSeek Harness `0.2.1-rc.2` and requires Node.js `>=22.19.0`.
 
 The original project code is MIT-licensed. The bundled skills and brand logo are separately licensed and are not covered by MIT. See [LICENSES.md](./LICENSES.md) before redistributing or modifying package contents.
 
@@ -20,6 +20,20 @@ The original project code is MIT-licensed. The bundled skills and brand logo are
 - Bridges MCP tools only; resources and prompts are not currently exposed.
 - Does not replay a tool call that failed during reauthorization.
 
+## Install from npm
+
+Version `0.1.6` has not been published to npm. For DSH `0.2.1-rc.2`, use the local directory or tarball below. The npm commands here are for DSH `0.1.2-rc.1` with plugin `0.1.5`.
+
+```sh
+dsh plugin --profile web add huayu-yuandian-legal-data@0.1.5
+```
+
+Without a global Harness installation:
+
+```sh
+npx @deepseek-ai/dsh@0.1.2-rc.1 plugin --profile web add huayu-yuandian-legal-data@0.1.5
+```
+
 ## Install from source
 
 ```sh
@@ -32,7 +46,7 @@ dsh plugin --profile web add /absolute/path/to/this-repository
 Install a maintainer-provided tarball with:
 
 ```sh
-dsh plugin --profile web add /absolute/path/to/huayu-yuandian-legal-data-0.1.5.tgz
+dsh plugin --profile web add /absolute/path/to/huayu-yuandian-legal-data-0.1.6.tgz
 ```
 
 ## Authentication
@@ -81,3 +95,5 @@ pnpm pack --dry-run
 Tests use in-memory credentials, fake OAuth services, and local fake MCP servers. Do not use real accounts in automated tests.
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md), [SECURITY.md](./SECURITY.md), and [CHANGELOG.md](./CHANGELOG.md) for project policies.
+
+DSH 0.2.1 gives stored credentials precedence over ambient sources. Removing a stored value can expose an environment fallback. The plugin checks the effective state after removal and reports remaining credentials instead of claiming cancellation or switching to OAuth.
