@@ -12,7 +12,7 @@ importers:
   .:
     dependencies:
       '@deepseek-ai/dsh':
-        specifier: 0.2.1-rc.2
+        specifier: '>=0.2.1-rc.2 <0.2.2-0'
         version: 0.2.1-rc.2(1152b40c70c457dc3992ac000f6218de)
       '@deepseek-ai/schemastery':
         specifier: 3.18.5
