@@ -6,7 +6,7 @@ Source repository：[yuandian-ailaw/yuandian_dsh_plugin](https://github.com/yuan
 
 `huayu-yuandian-legal-data` connects the aggregated [Yuandian Open Platform](https://open.chineselaw.com/) MCP endpoint to DeepSeek Harness. It also bundles four official skills for PRC legislation, court cases, company data, and securities compliance.
 
-Current version: `0.1.6`. It supports DeepSeek Harness `0.2.1-rc.2` and requires Node.js `>=22.19.0`.
+Current version: `0.1.7`. It supports DeepSeek Harness `>=0.2.1-rc.2 <0.2.2-0` and requires Node.js `>=22.19.0`.
 
 The original project code is MIT-licensed. The bundled skills and brand logo are separately licensed and are not covered by MIT. See [LICENSES.md](./LICENSES.md) before redistributing or modifying package contents.
 
@@ -22,16 +22,16 @@ The original project code is MIT-licensed. The bundled skills and brand logo are
 
 ## Install from npm
 
-Version `0.1.6` has not been published to npm. For DSH `0.2.1-rc.2`, use the local directory or tarball below. The npm commands here are for DSH `0.1.2-rc.1` with plugin `0.1.5`.
+Validated against DSH `0.2.1-rc.2` and `0.2.1-rc.3`. Development dependencies pin the test baseline, while the compatibility range admits subsequent candidates and the stable release in the same `0.2.1` series. Other admitted versions are not yet tested. Version `0.2.2`, including its prereleases, and later require reassessment.
 
 ```sh
-dsh plugin --profile web add huayu-yuandian-legal-data@0.1.5
+dsh plugin --profile web add huayu-yuandian-legal-data@0.1.7
 ```
 
 Without a global Harness installation:
 
 ```sh
-npx @deepseek-ai/dsh@0.1.2-rc.1 plugin --profile web add huayu-yuandian-legal-data@0.1.5
+npx @deepseek-ai/dsh@0.2.1-rc.3 plugin --profile web add huayu-yuandian-legal-data@0.1.7
 ```
 
 ## Install from source
@@ -46,7 +46,7 @@ dsh plugin --profile web add /absolute/path/to/this-repository
 Install a maintainer-provided tarball with:
 
 ```sh
-dsh plugin --profile web add /absolute/path/to/huayu-yuandian-legal-data-0.1.6.tgz
+dsh plugin --profile web add /absolute/path/to/huayu-yuandian-legal-data-0.1.7.tgz
 ```
 
 ## Authentication
