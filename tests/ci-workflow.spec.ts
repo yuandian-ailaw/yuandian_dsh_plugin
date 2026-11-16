@@ -25,7 +25,7 @@ describe('公开仓库 CI', () => {
     const job = workflow.jobs?.verify
     const matrix = job?.strategy?.matrix?.include ?? []
     expect(matrix.map(value => value.os)).toEqual(expect.arrayContaining(['ubuntu-latest', 'macos-latest', 'windows-latest']))
-    expect(matrix.map(value => value.node)).toEqual(expect.arrayContaining(['22.19.0', 24]))
+    expect(matrix.map(value => value.node)).toEqual(expect.arrayContaining(['24.9.0', 24]))
     expect(job?.steps?.some(step => step.run?.includes('pnpm install --frozen-lockfile --ignore-scripts'))).toBe(true)
     expect(job?.steps?.some(step => step.run === 'pnpm check')).toBe(true)
     expect(job?.steps?.some(step => step.run === 'pnpm test:coverage')).toBe(true)

@@ -6,7 +6,7 @@
 
 `huayu-yuandian-legal-data` 将[元典开放平台](https://open.chineselaw.com/)的聚合 MCP 入口接入 DeepSeek Harness，并随包提供法规、案例、企业和证券合规 4 个官方 Skill。
 
-当前版本：`0.1.7`。兼容 DeepSeek Harness `>=0.2.1-rc.2 <0.2.2-0`，要求 Node.js `>=22.19.0`。
+当前版本：`0.1.8`。兼容 DeepSeek Harness `>=0.2.2-rc.1 <0.2.3-0`，要求 Node.js `>=24.9.0`。
 
 项目原创代码采用 MIT License；随包 Skill 和品牌 Logo 使用单独授权，不属于 MIT License。完整边界见 [LICENSES.md](./LICENSES.md)。
 
@@ -27,16 +27,16 @@
 
 ### 从 npm 安装
 
-已验证 DSH `0.2.1-rc.2` 与 `0.2.1-rc.3`。开发依赖固定测试基线，对外兼容范围允许同一 `0.2.1` 系列的后续候选版和正式版；其他版本虽可能满足范围，但未经实测。`0.2.2`（包括其预发布版）及以上需重新评估。
+开发与验证基线为 DSH `0.2.2-rc.1`，兼容范围允许同一 `0.2.2` 系列的后续候选版和正式版；范围匹配不代表已经实测。旧版 DSH `0.2.1` 请使用插件 `0.1.7`；`0.2.3`（包括其预发布版）及以上需重新评估。
 
 ```sh
-dsh plugin --profile web add huayu-yuandian-legal-data@0.1.7
+dsh plugin --profile web add huayu-yuandian-legal-data@0.1.8
 ```
 
 未全局安装 Harness 时：
 
 ```sh
-npx @deepseek-ai/dsh@0.2.1-rc.3 plugin --profile web add huayu-yuandian-legal-data@0.1.7
+npx @deepseek-ai/dsh@0.2.2-rc.1 plugin --profile web add huayu-yuandian-legal-data@0.1.8
 ```
 
 ### 从本地目录安装
@@ -58,7 +58,7 @@ pnpm pack
 用户侧安装：
 
 ```sh
-dsh plugin --profile web add /absolute/path/to/huayu-yuandian-legal-data-0.1.7.tgz
+dsh plugin --profile web add /absolute/path/to/huayu-yuandian-legal-data-0.1.8.tgz
 ```
 
 公开仓库 CI 会在 Linux、macOS 和 Windows 上执行质量门禁，并用 `pnpm pack --dry-run` 校验包内容；CI 不会自动发布 npm 包或创建正式制品。正式制品只由维护者按 [RELEASING.md](./RELEASING.md) 发布。
@@ -67,10 +67,10 @@ dsh plugin --profile web add /absolute/path/to/huayu-yuandian-legal-data-0.1.7.t
 
 ```sh
 # macOS
-shasum -a 256 -c huayu-yuandian-legal-data-0.1.7.tgz.sha256
+shasum -a 256 -c huayu-yuandian-legal-data-0.1.8.tgz.sha256
 
 # Linux
-sha256sum -c huayu-yuandian-legal-data-0.1.7.tgz.sha256
+sha256sum -c huayu-yuandian-legal-data-0.1.8.tgz.sha256
 ```
 
 从源码安装时应固定公开仓库的 commit SHA，并只对可信源码授权构建。tarball 已包含构建产物，不需要安装时构建授权。

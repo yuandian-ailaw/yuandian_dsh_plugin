@@ -5,13 +5,13 @@ import packageJson from '../package.json' with { type: 'json' }
 describe('DSH 安装兼容范围', () => {
   const range = packageJson.engines.dsh
 
-  it.each(['0.2.1-rc.2', '0.2.1-rc.3', '0.2.1-rc.4', '0.2.1'])(
+  it.each(['0.2.2-rc.1', '0.2.2-rc.2', '0.2.2'])(
     '允许同一发布系列 %s（范围匹配不等于运行验证）', (version) => {
       expect(satisfies(version, range, { includePrerelease: true })).toBe(true)
     },
   )
 
-  it.each(['0.2.0', '0.2.1-alpha.5', '0.2.1-rc.1', '0.2.2-alpha.1', '0.2.2', '0.3.0-rc.1'])(
+  it.each(['0.2.1-rc.3', '0.2.1', '0.2.2-alpha.1', '0.2.2-rc.0', '0.2.3-alpha.1', '0.2.3', '0.3.0-rc.1'])(
     '拒绝测试基线之前及下一发布系列 %s', (version) => {
       expect(satisfies(version, range, { includePrerelease: true })).toBe(false)
     },

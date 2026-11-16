@@ -23,7 +23,7 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
-            node: 22.19.0
+            node: 24.9.0
             coverage: true
             pack: true
           - os: ubuntu-latest
@@ -31,11 +31,11 @@ jobs:
             coverage: false
             pack: false
           - os: macos-latest
-            node: 22.19.0
+            node: 24.9.0
             coverage: false
             pack: false
           - os: windows-latest
-            node: 22.19.0
+            node: 24.9.0
             coverage: false
             pack: false
     steps:
